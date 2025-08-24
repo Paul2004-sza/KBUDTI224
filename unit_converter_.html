@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Unit Converter</title>
+  <style>
+    .back-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #2c3e50;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .back-btn:hover {
+      background: #34495e;
+    }
+  </style>
+</head>
+<body>
+  <center>
+    <a href="index.html" class="back-btn">Back to Home</a>
+
+    <h1>Unit Converter</h1>
+
+    <!-- Length Converter -->
+    <h2>Length</h2>
+    <input type="number" id="lengthValue" placeholder="Enter value">
+    <select id="lengthOption">
+      <option value="m_to_ft">Meters → Feet</option>
+      <option value="ft_to_m">Feet → Meters</option>
+    </select>
+    <button onclick="convertLength()">Convert</button>
+    <p id="lengthResult"></p>
+
+    <!-- Height Converter -->
+    <h2>Height</h2>
+    <input type="number" id="heightValue" placeholder="Enter value">
+    <select id="heightOption">
+      <option value="cm_to_in">Centimeters → Inches</option>
+      <option value="in_to_cm">Inches → Centimeters</option>
+    </select>
+    <button onclick="convertHeight()">Convert</button>
+    <p id="heightResult"></p>
+
+    <!-- Temperature Converter -->
+    <h2>Temperature</h2>
+    <input type="number" id="tempValue" placeholder="Enter value">
+    <select id="tempOption">
+      <option value="c_to_f">Celsius → Fahrenheit</option>
+      <option value="f_to_c">Fahrenheit → Celsius</option>
+    </select>
+    <button onclick="convertTemperature()">Convert</button>
+    <p id="tempResult"></p>
+
+    <!-- Area Converter -->
+    <h2>Area</h2>
+    <input type="number" id="areaValue" placeholder="Enter value">
+    <select id="areaOption">
+      <option value="sqm_to_sqft">Square Meters → Square Feet</option>
+      <option value="sqft_to_sqm">Square Feet → Square Meters</option>
+    </select>
+    <button onclick="convertArea()">Convert</button>
+    <p id="areaResult"></p>
+  </center>
+
+  <script>
+    function convertLength() {
+      let value = parseFloat(document.getElementById("lengthValue").value);
+      let option = document.getElementById("lengthOption").value;
+      let result = "";
+
+      if (option === "m_to_ft") {
+        result = value + " meters = " + (value * 3.28084).toFixed(2) + " feet";
+      } else {
+        result = value + " feet = " + (value / 3.28084).toFixed(2) + " meters";
+      }
+      document.getElementById("lengthResult").innerHTML = result;
+    }
+
+    function convertHeight() {
+      let value = parseFloat(document.getElementById("heightValue").value);
+      let option = document.getElementById("heightOption").value;
+      let result = "";
+
+      if (option === "cm_to_in") {
+        result = value + " cm = " + (value / 2.54).toFixed(2) + " inches";
+      } else {
+        result = value + " inches = " + (value * 2.54).toFixed(2) + " cm";
+      }
+      document.getElementById("heightResult").innerHTML = result;
+    }
+
+    function convertTemperature() {
+      let value = parseFloat(document.getElementById("tempValue").value);
+      let option = document.getElementById("tempOption").value;
+      let result = "";
+
+      if (option === "c_to_f") {
+        result = value + "°C = " + ((value * 9/5) + 32).toFixed(2) + "°F";
+      } else {
+        result = value + "°F = " + (((value - 32) * 5/9).toFixed(2)) + "°C";
+      }
+      document.getElementById("tempResult").innerHTML = result;
+    }
+
+    function convertArea() {
+      let value = parseFloat(document.getElementById("areaValue").value);
+      let option = document.getElementById("areaOption").value;
+      let result = "";
+
+      if (option === "sqm_to_sqft") {
+        result = value + " m² = " + (value * 10.7639).toFixed(2) + " ft²";
+      } else {
+        result = value + " ft² = " + (value / 10.7639).toFixed(2) + " m²";
+      }
+      document.getElementById("areaResult").innerHTML = result;
+    }
+
+    // Enable Enter key to trigger conversion
+    document.getElementById("lengthValue").addEventListener("keydown", function(e){
+      if(e.key === "Enter") convertLength();
+    });
+
+    document.getElementById("heightValue").addEventListener("keydown", function(e){
+      if(e.key === "Enter") convertHeight();
+    });
+
+    document.getElementById("tempValue").addEventListener("keydown", function(e){
+      if(e.key === "Enter") convertTemperature();
+    });
+
+    document.getElementById("areaValue").addEventListener("keydown", function(e){
+      if(e.key === "Enter") convertArea();
+    });
+  </script>
+</body>
+</html>
