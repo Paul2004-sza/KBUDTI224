@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Change Calculator</title>
+    <style>
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin: 15px;
+        }
+        .back-btn:hover {
+            background: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <a href="index.html" class="back-btn">Back to Home</a>
+    </div>
+
+    <center>
+        <h1><font size="7">Calculate Change</font></h1>
+        <br>
+        <input type="number" id="amount" placeholder="Enter Amount:" style="font-size:24px; width:250px; height:40px;">
+        <br><br>
+        <button onclick="calculateChange()" style="font-size:24px; padding:10px 20px;">Submit</button>
+        <br><br>
+        <div id="result" style="font-size:28px; font-weight:bold;"></div>
+    </center>
+
+    <script>
+        function calculateChange() {
+            const amount = parseInt(document.getElementById('amount').value);
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = "";
+
+            if (isNaN(amount) || amount < 0) {
+                resultElement.textContent = "Please enter a valid positive number";
+                return;
+            }
+
+            const denominations = [500, 100, 50, 20, 10, 5, 1];
+            let remaining = amount;
+
+            let i = 0;
+            while (i < denominations.length && remaining > 0) {
+                const denom = denominations[i];
+                const count = Math.floor(remaining / denom);
+
+                if (count > 0) {
+                    resultElement.innerHTML += count + " × ฿" + denom + "<br>";
+                    remaining = remaining % denom;
+                }
+
+                i++;
+            }
+        }
+
+        document.getElementById('amount').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateChange();
+            }
+        });
+    </script>
+</body>
+</html>
